@@ -1,12 +1,16 @@
 package com.rps.model;
 
+import java.util.UUID;
+
 public class Game {
+	private UUID id;
 	private User player1;
 	private User player2;
 	private int playerOneWins;
 	private int playerTwoWins;
 	
 	public Game(User player1, User player2) {
+		this.id = UUID.randomUUID();
 		this.player1 = player1;
 		this.player2 = player2;
 		this.playerOneWins = 0;
@@ -27,6 +31,10 @@ public class Game {
 
 	public void setPlayer2(User player2) {
 		this.player2 = player2;
+	}
+	
+	public UUID getId() {
+		return id;
 	}
 	
 	public int getWinner() {
