@@ -8,8 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 
-import com.amigoscode.demo.exception.ApiException;
-import com.amigoscode.demo.exception.ApiRequestException;
+import com.rps.api.exception.ApiException;
+import com.rps.api.exception.ApiRequestException;
 
 public class ApiExceptionHandler {
 	 @ExceptionHandler(value = {ApiRequestException.class})
@@ -24,4 +24,5 @@ public class ApiExceptionHandler {
 	        );
 	        // 2. Return response entity
 	        return new ResponseEntity<>(apiException, badRequest);
+	 }
 }

@@ -2,6 +2,9 @@ package com.rps.model;
 
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 public class Game {
 	private UUID id;
 	private User player1;
@@ -15,7 +18,7 @@ public class Game {
 		this.player1 = player1;
 		this.player2 = null;
 		this.playerOneWins = 0;
-		this.playerTwoWins= 0;
+		this.playerTwoWins = 0;
 		this.isOpen = true;
 	}
 
@@ -46,8 +49,11 @@ public class Game {
 	public boolean getIsOpen() {
 		return isOpen;
 	}
-	
+	@JsonIgnore
 	public int getWinner() {
+		//playerOne win = 1
+		//playerTwo win = 0
+		//tie = -1
 		if(player1.getMove().equals("paper")) {
 			if(player2.getMove().equals("rock")) {
 				playerOneWins += 1;

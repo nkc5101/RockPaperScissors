@@ -1,11 +1,13 @@
 package com.rps.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class User {
 	private String username;
 	private String password;
 	private String move;
 	
-	public User(String username, String password) {
+	public User(@JsonProperty String username, @JsonProperty String password) {
 		this.username = username;
 		this.password = password;
 	}

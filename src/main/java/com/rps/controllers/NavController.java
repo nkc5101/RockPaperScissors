@@ -1,17 +1,21 @@
 package com.rps.controllers;
 
 
+import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
 import com.rps.model.Game;
+import com.rps.model.User;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequestMapping("api/rps")
@@ -19,9 +23,10 @@ public class NavController {
 	private final GameService gameService;
 	private final UserService userService;
 	@Autowired
-	public NavController(GameService gameService, UserService userService) {
-		this.gameService = gameService;
+	public NavController(UserService userService, GameService gameService) {
 		this.userService = userService;
+		this.gameService = gameService;
+
 	}
 	
 	@GetMapping
@@ -30,8 +35,13 @@ public class NavController {
 	}
 	
 	@GetMapping(path = "/games/{id}")
-	public Game getGame(@PathVariable("id") UUID id) {
-		return gameService.getGame(id);
+	public ResponseEntity<Game> getGame(@PathVariable("id") UUID id) {
+		Game game = gameService.getGame(id);
+	    if (game == null) {
+	        return ResponseEntity.notFound().build();
+	    } else {
+	        return ResponseEntity.ok(game);
+	    }
 	}
 	
 	@PostMapping(path="/games/{username}")
@@ -45,8 +55,13 @@ public class NavController {
 	}
 	
 	@GetMapping(path="/{username}")
-	public void getUserInfo(@PathVariable("username") String username) {
-		userService.getUserInfo(username);
+	public ResponseEntity<User> getUserInfo(@PathVariable("username") String username) {
+		User user = userService.getUserInfo(username);
+		if(user == null) {
+			return ResponseEntity.notFound().build();
+		} else {
+			return ResponseEntity.ok(user);
+		}
 	}
 	
 	
