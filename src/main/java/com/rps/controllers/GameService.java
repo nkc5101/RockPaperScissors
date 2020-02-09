@@ -20,8 +20,11 @@ public class GameService {
 		return games;
 	}
 	
-	public void createGame(User playerOne, User playerTwo) {
-		games.add(new Game(playerOne, playerTwo));
+	public boolean createGame(String playerOne)) {
+		User player = UserService.exists(playerOne);
+			games.add(new Game(player));
+		
+		
 	}
 	
 	public Game getGame(UUID id) {

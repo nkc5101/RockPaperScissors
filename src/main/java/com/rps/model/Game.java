@@ -8,13 +8,15 @@ public class Game {
 	private User player2;
 	private int playerOneWins;
 	private int playerTwoWins;
+	private boolean isOpen;
 	
-	public Game(User player1, User player2) {
+	public Game(User player1) {
 		this.id = UUID.randomUUID();
 		this.player1 = player1;
-		this.player2 = player2;
+		this.player2 = null;
 		this.playerOneWins = 0;
 		this.playerTwoWins= 0;
+		this.isOpen = true;
 	}
 
 	public User getPlayer1() {
@@ -35,6 +37,14 @@ public class Game {
 	
 	public UUID getId() {
 		return id;
+	}
+	
+	public void setIsOpen(boolean isOpen) {
+		this.isOpen=isOpen;
+	}
+	
+	public boolean getIsOpen() {
+		return isOpen;
 	}
 	
 	public int getWinner() {
